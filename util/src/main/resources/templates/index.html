@@ -19,5 +19,17 @@
         </div>
     </form>
 </div>
+<br><br>
+<div class="pair-matching">
+    <h2>모우다 페어 매칭</h2>
+    <h3 th:text="${startFrom.monthValue} + '월 ' + ${startFrom.dayOfMonth} + '일(월) 부터 ' + ${endAt.monthValue} + '월 ' + ${endAt.dayOfMonth} + '일(일) 까지의 페어 매칭 정보를 확인합니다.'"></h3>
+    <form id="pairMatchingForm" th:action="@{/pairs/randomMatching}" method="post">
+        <input type="hidden" name="team" th:value="${teamName != null ? teamName : 'mouda'}">
+        <input type="hidden" name="searchDate" th:value="${searchDate}">
+        <div class="button-container">
+            <button type="submit">확인하기</button>
+        </div>
+    </form>
+</div>
 </body>
 </html>

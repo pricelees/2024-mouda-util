@@ -108,7 +108,7 @@ tr:last-child td {
     }
 }
 
-.seat-assign, .seat-assign-result {
+.seat-assign, .seat-assign-result, .pair-matching {
     text-align: center;
     margin: 0 auto;
     padding: 20px;
