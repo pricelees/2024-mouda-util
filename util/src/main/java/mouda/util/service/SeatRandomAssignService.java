@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import mouda.util.domain.AssignedSeats;
@@ -22,6 +23,7 @@ import mouda.util.dto.AssignedSeatsResponse;
 import mouda.util.properties.SeatsProperties;
 
 @Service
+@Transactional
 @EnableConfigurationProperties(SeatsProperties.class)
 @RequiredArgsConstructor
 public class SeatRandomAssignService {
@@ -31,17 +33,19 @@ public class SeatRandomAssignService {
 	private final TeamRepository teamRepository;
 	private final MemberRepository memberRepository;
 
-	public AssignedSeatsResponse assignSeats(String teamName, LocalDate searchDate) {
+	public AssignedSeatsResponse assignSeats(String teamName, LocalDate searchDate, boolean isRetry) {
 		Team team = teamRepository.findByName(teamName);
 		Level3Week week = Level3Week.getWeekFromDate(searchDate);
-		if (assignedSeatsRepository.existsByWeek(week)) {
-			return getAssignedSeatsIfExist(week);
+
+		if (isRetry && assignedSeatsRepository.existsByWeek(week)) {
+			assignedSeatsRepository.deleteByWeek(week);
 		}
 
-		List<String> frontendSeats = getRandomAssignedSeats(Part.FRONTEND, team);
-		List<String> backendSeats = getRandomAssignedSeats(Part.BACKEND, team);
+		if (isRetry || !assignedSeatsRepository.existsByWeek(week)) {
+			return assign(team, week);
+		}
 
-		return assign(frontendSeats, backendSeats, week);
+		return getAssignedSeatsIfExist(week);
 	}
 
 	private AssignedSeatsResponse getAssignedSeatsIfExist(Level3Week week) {
@@ -51,7 +55,10 @@ public class SeatRandomAssignService {
 		return new AssignedSeatsResponse(seats);
 	}
 
-	private AssignedSeatsResponse assign(List<String> frontendSeats, List<String> backendSeats, Level3Week week) {
+	private AssignedSeatsResponse assign(Team team, Level3Week week) {
+		List<String> frontendSeats = getRandomAssignedSeats(Part.FRONTEND, team);
+		List<String> backendSeats = getRandomAssignedSeats(Part.BACKEND, team);
+
 		int totalSeats = seatsProperties.totalCount();
 		List<String> result = new ArrayList<>(Collections.nCopies(totalSeats, seatsProperties.emptySeatName()));
 
@@ -93,8 +100,7 @@ public class SeatRandomAssignService {
 	}
 
 	private List<String> getMembersByTeamAndParts(Part part, Team team) {
-		List<String> names = memberRepository.findAllByPartAndTeam(part, team).stream()
-			.map(Member::getName).toList();
+		List<String> names = memberRepository.findAllByPartAndTeam(part, team).stream().map(Member::getName).toList();
 
 		return new ArrayList<>(names);
 	}

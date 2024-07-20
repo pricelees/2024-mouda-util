@@ -21,10 +21,11 @@ public class SeatRandomAssignController {
 	public String randomAssigned(
 		@RequestParam(name = "team") String teamName,
 		@RequestParam(name = "searchDate") String date,
+		@RequestParam(name = "retry", defaultValue = "false") boolean isRetry,
 		Model model
 	) {
 		LocalDate searchDate = LocalDate.parse(date);
-		AssignedSeatsResponse response = seatRandomAssignService.assignSeats(teamName, searchDate);
+		AssignedSeatsResponse response = seatRandomAssignService.assignSeats(teamName, searchDate, isRetry);
 
 		model.addAttribute("seats", response.names());
 		model.addAttribute("teamName", teamName);

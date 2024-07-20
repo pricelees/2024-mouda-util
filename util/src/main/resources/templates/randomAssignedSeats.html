@@ -34,9 +34,15 @@
         </table>
     </div>
     <br>
-    <div class="button-container">
-        <button onclick="location.href='/'">처음으로</button>
-    </div>
+    <form action="/seats/randomAssigned" method="post">
+        <input type="hidden" name="team" th:value="${teamName}">
+        <input type="hidden" name="searchDate" th:value="${searchDate}">
+        <input type="hidden" name="retry" value="true">
+        <div class="button-container">
+            <button type="submit">재배정</button>
+            <button type="button" onclick="location.href='/'">처음으로</button>
+        </div>
+    </form>
 </div>
 </body>
 </html>

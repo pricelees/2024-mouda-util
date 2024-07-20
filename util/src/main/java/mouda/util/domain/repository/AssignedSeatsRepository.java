@@ -9,4 +9,6 @@ public interface AssignedSeatsRepository extends JpaRepository<AssignedSeats, Lo
 	AssignedSeats findByWeek(Level3Week week);
 
 	boolean existsByWeek(Level3Week week);
+
+	void deleteByWeek(Level3Week week);
 }
