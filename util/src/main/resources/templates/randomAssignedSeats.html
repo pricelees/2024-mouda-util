@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>자리 배정 결과</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="seat-assign-result">
+    <h2>자리 배정 결과</h2>
+    <div class="seating">
+        <table>
+            <tr>
+                <td th:text="${seats[0]}"></td>
+                <td></td>
+                <td th:text="${seats[1]}"></td>
+            </tr>
+            <tr>
+                <td th:text="${seats[2]}"></td>
+                <td></td>
+                <td th:text="${seats[3]}"></td>
+            </tr>
+            <tr>
+                <td th:text="${seats[4]}"></td>
+                <td></td>
+                <td th:text="${seats[5]}"></td>
+            </tr>
+            <tr>
+                <td th:text="${seats[6]}"></td>
+                <td th:text="${seats[7]}"></td>
+                <td th:text="${seats[8]}"></td>
+            </tr>
+        </table>
+    </div>
+    <br>
+    <div class="button-container">
+        <button onclick="location.href='/'">처음으로</button>
+    </div>
+</div>
+</body>
+</html>
