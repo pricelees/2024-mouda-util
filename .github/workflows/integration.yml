@@ -30,10 +30,7 @@ jobs:
       - name: Extract JAR file name
         id: extract_jar
         run: |
-          pwd 
-          ls -al
           echo "JAR_FILE=$(ls util/build/libs/*.jar)" >> $GITHUB_ENV
-          echo $(ls util/build/libs/*.jar)
 
       - name: Export Spring Datasource
         id: export_datasource
@@ -46,7 +43,7 @@ jobs:
         run: |
           pwd
           ls -al
-          docker buildx build ./ --platform=linux/amd64 -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_SPRING_REPOSITORY }}:latest
+          docker buildx build ./ --platform=linux/amd64 --build-arg JAR_FILE=$JAR_FILE -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_SPRING_REPOSITORY }}:latest
 
       - name: Log in to DockerHub
         uses: docker/login-action@v2
