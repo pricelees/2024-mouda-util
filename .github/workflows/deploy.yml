@@ -30,7 +30,7 @@ jobs:
 
       - name: docker compose pull
         run: |
-          docker compose -f ~/actions-runner/docker-compose.yml pull
+          docker compose -f ~/actions-runner/docker-compose.yml pull 1>/dev/null
 
       - name: docker compose up
         run: |
