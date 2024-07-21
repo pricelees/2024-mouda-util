@@ -37,12 +37,15 @@ public class SeatRandomAssignService {
 		Team team = teamRepository.findByName(teamName);
 		Level3Week week = Level3Week.getWeekFromDate(searchDate);
 
-		if (isRetry && assignedSeatsRepository.existsByWeek(week)) {
+		if (isRetry) {
 			assignedSeatsRepository.deleteByWeek(week);
 			return assign(team, week);
 		}
+		if (assignedSeatsRepository.existsByWeek(week)) {
+			return getAssignedSeatsIfExist(week);
+		}
 
-		return getAssignedSeatsIfExist(week);
+		return assign(team, week);
 	}
 
 	private AssignedSeatsResponse getAssignedSeatsIfExist(Level3Week week) {

@@ -18,11 +18,11 @@ jobs:
 
       - name: allow ubuntu to access actions-runner
         run: |
-          sudo chown -R root:ubuntu ~/actions-runner
+          sudo chown -R ubuntu:ubuntu ~/actions-runner
 
       - name: grant permission to docker-compose
         run: |
-          sudo chmod g+x ~/actions-runner/docker-compose.yml
+          sudo chmod +x ~/actions-runner/docker-compose.yml
 
       - name: docker compose down
         run: |
