@@ -7,6 +7,7 @@ public record BoardSubmitRequest(
 	@Length(min = 1, max = 5)
 	String author,
 	@Length(min = 1, max = 100)
-	String content
+	String content,
+	boolean isPublic
 ) {
 }

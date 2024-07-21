@@ -24,6 +24,7 @@ public class BoardService {
 			.board(board)
 			.author(request.author())
 			.content(request.content())
+			.isPublic(request.isPublic())
 			.createdAt(LocalDateTime.now())
 			.build();
 

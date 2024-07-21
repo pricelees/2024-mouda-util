@@ -22,6 +22,7 @@ public class Post {
 
 	private String author;
 	private String content;
+	private boolean isPublic;
 
 	@ManyToOne
 	@JoinColumn(name = "board_id")
@@ -30,9 +31,10 @@ public class Post {
 	private LocalDateTime createdAt;
 
 	@Builder
-	public Post(String author, String content, Board board, LocalDateTime createdAt) {
+	public Post(String author, String content, boolean isPublic, Board board, LocalDateTime createdAt) {
 		this.author = author;
 		this.content = content;
+		this.isPublic = isPublic;
 		this.board = board;
 		this.createdAt = createdAt;
 	}
