@@ -22,10 +22,10 @@ jobs:
           distribution: 'corretto'
 
       - name: grant gradlew execute permission
-        run: chmod +x gradlew
+        run: chmod +x /util/gradlew
 
       - name: gradle build
-        run: ./gradlew build -x test
+        run: /util/gradlew build
 
       - name: Build Docker image
         run: |
