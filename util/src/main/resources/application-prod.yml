@@ -51,6 +51,7 @@ seats:
       - 4
       - 5
 
+
 logging:
   level:
     web: info
