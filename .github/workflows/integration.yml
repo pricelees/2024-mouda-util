@@ -1,9 +1,9 @@
 name: integration
 
 on:
-  pull_request:
+  push:
     branches:
-      - develop
+      - fix1
 
 jobs:
   build:
