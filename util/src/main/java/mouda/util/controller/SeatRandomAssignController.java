@@ -33,18 +33,4 @@ public class SeatRandomAssignController {
 
 		return "randomAssignedSeats";
 	}
-
-	@PostMapping("/pairs/randomMatching")
-	public String pairsRandomMatching(
-		@RequestParam(name = "team") String teamName,
-		@RequestParam(name = "searchDate") String date,
-		Model model
-	) {
-		LocalDate searchDate = LocalDate.parse(date);
-
-		model.addAttribute("teamName", teamName);
-		model.addAttribute("searchDate", searchDate);
-
-		return "randomPairMatching";
-	}
 }
