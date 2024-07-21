@@ -35,7 +35,7 @@ jobs:
       - name: Export Spring Datasource
         id: export_datasource
         run: |
-          echo "SPRING_DATASOURCE_URL=jdbc:mysql://application_db:3306/${{ secrets.DATABASE_NAME }}" >> $GITHUB_ENV
+          echo "SPRING_DATASOURCE_URL=jdbc:mysql:/application_db:3306/${{ secrets.DATABASE_NAME }}" >> $GITHUB_ENV
           echo "SPRING_DATASOURCE_USERNAME=${{ secrets.DATABASE_USERNAME }}" >> $GITHUB_ENV
           echo "SPRING_DATASOURCE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}" >> $GITHUB_ENV
 
