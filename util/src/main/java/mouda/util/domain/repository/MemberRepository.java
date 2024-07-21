@@ -9,6 +9,7 @@ import mouda.util.domain.Part;
 import mouda.util.domain.Team;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
+
 	List<Member> findAllByTeam(Team team);
 
 	List<Member> findAllByPartAndTeam(Part part, Team team);

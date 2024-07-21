@@ -66,6 +66,14 @@ button:focus {
     padding: 20px 10px;
 }
 
+.matching {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 20px 10px;
+}
+
 table {
     table-layout: fixed;
     border-collapse: collapse;
@@ -73,6 +81,7 @@ table {
     max-width: 600px;
     background-color: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
 td {
@@ -108,7 +117,7 @@ tr:last-child td {
     }
 }
 
-.seat-assign, .seat-assign-result {
+.seat-assign, .seat-assign-result, .pair-matching, .pair-matching-result {
     text-align: center;
     margin: 0 auto;
     padding: 20px;
