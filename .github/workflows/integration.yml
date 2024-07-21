@@ -13,7 +13,7 @@ jobs:
       - name: checkout repository
         uses: actions/checkout@v4
         with:
-          ref: fix/#21
+          ref: develop
 
       - name: setup JDK 17 corretto
         uses: actions/setup-java@v4
@@ -47,7 +47,7 @@ jobs:
           --build-arg SPRING_DATASOURCE_URL=$SPRING_DATASOURCE_URL \
           --build-arg SPRING_DATASOURCE_USERNAME=$SPRING_DATASOURCE_USERNAME \
           --build-arg SPRING_DATASOURCE_PASSWORD=$SPRING_DATASOURCE_PASSWORD \
-          -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_SPRING_REPOSITORY }}:latest
+          -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_SPRING_REPOSITORY }}:latest 1>/dev/null
 
       - name: Log in to DockerHub
         uses: docker/login-action@v2
