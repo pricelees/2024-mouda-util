@@ -21,4 +21,4 @@ ENV SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
 ENV SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
 
 # Run the JAR
-ENTRYPOINT ["java", "-Dspring.profiles.active=prod", "-jar", "/app.jar"]
+ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=prod","-Dspring.datasource.url=${SRPING_DATASOURCE_URL}", "-Dspring.datasource.username=${SRPING_DATASOURCE_USERNAME}", "-Dspring.datasource.password=${SRPING_DATASOURCE_PASSWORD}", "/app.jar"]
