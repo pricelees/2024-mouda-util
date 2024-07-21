@@ -9,6 +9,7 @@ EXPOSE 8080
 
 # Copy the JAR file to the container
 ARG JAR_FILE
+ENV JAR_FILE=${JAR_FILE}
 COPY ${JAR_FILE} /app.jar
 
 # Datasource environment variables
