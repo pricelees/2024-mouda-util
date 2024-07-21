@@ -7,11 +7,13 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
+import mouda.util.domain.Board;
 import mouda.util.domain.Level3Week;
 import mouda.util.domain.Member;
 import mouda.util.domain.Pair;
 import mouda.util.domain.Part;
 import mouda.util.domain.Team;
+import mouda.util.domain.repository.BoardRepository;
 import mouda.util.domain.repository.MemberRepository;
 import mouda.util.domain.repository.PairRepository;
 import mouda.util.domain.repository.TeamRepository;
@@ -26,6 +28,7 @@ public class DataLoader implements CommandLineRunner {
 	private final TeamRepository teamRepository;
 	private final MemberRepository memberRepository;
 	private final PairRepository pairRepository;
+	private final BoardRepository boardRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -40,6 +43,9 @@ public class DataLoader implements CommandLineRunner {
 		));
 
 		addPairRecords();
+
+		Board board = Board.builder().teamName(team.getName()).build();
+		boardRepository.save(board);
 	}
 
 	private void addPairRecords() {
