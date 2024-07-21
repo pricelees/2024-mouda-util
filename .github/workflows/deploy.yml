@@ -26,7 +26,7 @@ jobs:
 
       - name: docker compose down
         run: |
-          docker compose -f ~/actions-runner/docker-compose.yml down --rml all
+          docker compose -f ~/actions-runner/docker-compose.yml down --rmi all
           docker compose -f ~/actions-runner/docker-compose.yml down -v
 
       - name: docker compose up
