@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('boardForm');
-    form.addEventListener('submit', submitForm);
+    if (form) {
+        form.addEventListener('submit', submitForm);
+    }
 });
 
 function submitForm(event) {
@@ -9,11 +11,13 @@ function submitForm(event) {
     const team = document.querySelector('input[name="team"]').value;
     const author = document.querySelector('input[name="author"]').value;
     const content = document.querySelector('textarea[name="content"]').value;
+    const isPublic = document.querySelector('input[name="isPublic"]').checked;
 
     const data = {
         team: team,
         author: author,
-        content: content
+        content: content,
+        isPublic: isPublic
     };
 
     fetch('/boards', {
@@ -23,13 +27,15 @@ function submitForm(event) {
         },
         body: JSON.stringify(data)
     })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-            alert('성공적으로 제출되었습니다!');
+        .then(response => {
+            if (response.status === 201) {
+                alert('성공적으로 제출되었습니다!');
+            } else {
+                throw new Error('제출 실패! 내용을 다시 확인해주세요!');
+            }
         })
         .catch((error) => {
             console.error('Error:', error);
-            alert('제출에 실패했습니다.');
+            alert(error.message);
         });
 }

@@ -37,7 +37,7 @@
     <h2>모우다 게시판</h2>
     <h3>자유롭게 글을 작성하세요!</h3>
     <h4>작성자는 최대 5글자, 내용은 최대 100글자까지 가능!</h4>
-    <form id="boardForm" onsubmit="submitForm(event)">
+    <form id="boardForm">
         <input type="hidden" name="team" th:value="${teamName != null ? teamName : 'mouda'}">
         <div class="form-group">
             <label for="author">작성자</label>
