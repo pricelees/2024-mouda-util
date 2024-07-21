@@ -22,7 +22,9 @@ jobs:
           distribution: 'corretto'
 
       - name: grant gradlew execute permission
-        run: chmod +x /util/gradlew
+        run: |
+          pwd
+          chmod +x /util/gradlew
 
       - name: gradle build
         run: /util/gradlew build
