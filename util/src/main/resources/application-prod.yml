@@ -11,7 +11,10 @@ spring:
     hibernate:
       ddl-auto: none
     show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
 
 logging:
   level:
-    web: debug
+    web: info
