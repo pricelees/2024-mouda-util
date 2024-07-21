@@ -4,6 +4,9 @@ FROM amazoncorretto:17.0.12
 # Set the working directory in the container
 WORKDIR /app
 
+# Port to expose
+EXPOSE 8080
+
 # Copy the JAR file to the container
 ARG JAR_FILE
 COPY ${JAR_FILE} /app.jar
@@ -19,4 +22,4 @@ ENV SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
 ENV SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
 
 # Run the JAR
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=${SPRING_PROFILES_ACTIVE}", "-Dspring.datasource.url=${SPRING_DATASOURCE_URL}", "-Dspring.datasource.username=${SPRING_DATASOURCE_USERNAME}", "-Dspring.datasource.password=${SPRING_DATASOURCE_PASSWORD}", "/app.jar"]
