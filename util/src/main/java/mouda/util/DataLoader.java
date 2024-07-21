@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import mouda.util.domain.repository.TeamRepository;
 import mouda.util.properties.TeamProperties;
 
 @Component
+@Profile("dev")
 @EnableConfigurationProperties(TeamProperties.class)
 @RequiredArgsConstructor
 public class DataLoader implements CommandLineRunner {

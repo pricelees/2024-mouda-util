@@ -5,14 +5,16 @@ server:
       charset: UTF-8
 
 spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: none
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
-        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
 
 logging:
   level:
-    web: debug
+    web: info
