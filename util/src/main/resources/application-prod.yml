@@ -15,43 +15,6 @@ spring:
       ddl-auto: none
     show-sql: false
 
-team:
-  name: mouda
-  parts:
-    backend:
-      members:
-        - 호기
-        - 안나
-        - 테바
-        - 테니
-        - 상돌
-    frontend:
-      members:
-        - 수야
-        - 소파
-        - 치코
-
-seats:
-  total-count: 9
-  empty-seat-name: 빈자리
-  seats-delimiter: ','
-  assigned-count-by-team:
-    frontend: 3
-    backend: 6
-  assignable-positions:
-    frontend:
-      - 6
-      - 7
-      - 8
-    backend:
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-
-
 logging:
   level:
     web: info
