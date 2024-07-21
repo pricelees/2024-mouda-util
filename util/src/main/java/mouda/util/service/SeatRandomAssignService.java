@@ -39,9 +39,6 @@ public class SeatRandomAssignService {
 
 		if (isRetry && assignedSeatsRepository.existsByWeek(week)) {
 			assignedSeatsRepository.deleteByWeek(week);
-		}
-
-		if (isRetry || !assignedSeatsRepository.existsByWeek(week)) {
 			return assign(team, week);
 		}
 
