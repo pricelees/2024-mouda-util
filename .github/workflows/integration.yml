@@ -21,11 +21,14 @@ jobs:
           java-version: '17'
           distribution: 'corretto'
 
+      - name: change directory
+        run: cd util
+
       - name: grant gradlew execute permission
-        run: chmod +x util/gradlew
+        run: chmod +x ./gradlew
 
       - name: gradle build
-        run: util/gradlew build
+        run: ./gradlew clean build
 
       - name: Build Docker image
         run: |
