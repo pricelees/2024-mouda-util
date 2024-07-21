@@ -41,7 +41,13 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker buildx build ./ --platform=linux/amd64 --build-arg JAR_FILE=$JAR_FILE -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_SPRING_REPOSITORY }}:latest
+          docker buildx build ./ \
+          --platform=linux/amd64 \
+          --build-arg JAR_FILE=$JAR_FILE \
+          --build-arg SPRING_DATASOURCE_URL=${{ secrets.DATABASE_URL }} \
+          --build-arg SPRING_DATASOURCE_USERNAME=${{ secrets.DATABASE_USERNAME }} \
+          --build-arg SPRING_DATASOURCE_PASSWORD=${{ secrets.DATABASE_PASSWORD }} \
+          -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_SPRING_REPOSITORY }}:latest
 
       - name: Log in to DockerHub
         uses: docker/login-action@v2
