@@ -29,8 +29,8 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            util/build
-            util/Dockerfile
+            ~/Dockerfile
+            ~/util/build
           key: ${{ runner.os }}-build
 
 
