@@ -22,7 +22,7 @@ jobs:
       - name: Extract JAR file name
         id: extract_jar
         run: |
-          echo "JAR_FILE=$(ls build/libs/*.jar)" >> $GITHUB_ENV
+          echo "JAR_FILE=$(ls *.jar)" >> $GITHUB_ENV
 
       - name: Export Spring Datasource
         id: export_datasource
