@@ -21,7 +21,7 @@ team:
 
 seats:
   total-count: 9
-  empty-seat-name: 빈자리
+  empty-seat-name: --
   seats-delimiter: ','
   assigned-count-by-team:
     frontend: 3
