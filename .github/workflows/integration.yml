@@ -25,14 +25,23 @@ jobs:
           chmod +x ./gradlew
           ./gradlew clean build
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
+      - name: Cache build artifacts
+        uses: actions/cache@v4
         with:
-          name: build-artifacts
-          path: util/build
+          path: |
+            util/build
+            util/Dockerfile
+          key: ${{ runner.os }}-build
 
-      - name: Upload Dockerfile
-        uses: actions/upload-artifact@v4
-        with:
-          name: Dockerfile
-          path: Dockerfile
+
+#      - name: Upload build artifacts
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: build-artifacts
+#          path: util/build
+#
+#      - name: Upload Dockerfile
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: Dockerfile
+#          path: Dockerfile
