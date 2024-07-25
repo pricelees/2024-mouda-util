@@ -29,7 +29,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: jar
-          path: build/libs/
+          path: util/build
 
       - name: Upload Dockerfile
         uses: actions/upload-artifact@v4
