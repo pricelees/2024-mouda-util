@@ -25,10 +25,10 @@ jobs:
           chmod +x ./gradlew
           ./gradlew clean build
 
-      - name: Upload jar
+      - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: jar
+          name: build artifacts
           path: util/build
 
       - name: Upload Dockerfile
