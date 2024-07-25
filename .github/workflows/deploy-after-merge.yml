@@ -9,6 +9,9 @@ jobs:
   create_docker_image_and_push_to_dockerhub:
     runs-on: ubuntu-latest
     steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+
       - name: download build artifacts
         uses: actions/download-artifact@v4
         with:
