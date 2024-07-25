@@ -22,6 +22,8 @@ jobs:
         run: |
           pwd
           ls
+          cd util
+          ls
 #      - name: download build artifacts
 #        uses: actions/download-artifact@v4
 #        with:
@@ -35,7 +37,7 @@ jobs:
       - name: Extract JAR file name
         id: extract_jar
         run: |
-          echo "JAR_FILE=$(ls libs/*.jar)" >> $GITHUB_ENV
+          echo "JAR_FILE=$(ls util/build/libs/*.jar)" >> $GITHUB_ENV
 
       - name: Export Spring Datasource
         id: export_datasource
