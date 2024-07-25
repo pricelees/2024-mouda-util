@@ -12,7 +12,7 @@ jobs:
       - name: download build artifacts
         uses: actions/download-artifact@v4
         with:
-          name: build-artifact
+          name: build-artifacts
 
       - name: download dockerfile
         uses: actions/download-artifact@v4
