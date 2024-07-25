@@ -1,4 +1,4 @@
-name: integration
+name: test_when_pr_opened
 
 on:
   pull_request:
@@ -12,8 +12,6 @@ jobs:
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
-        with:
-          ref: develop
 
       - name: setup JDK 17 corretto
         uses: actions/setup-java@v4
@@ -27,33 +25,14 @@ jobs:
           chmod +x ./gradlew
           ./gradlew clean build
 
-      - name: Extract JAR file name
-        id: extract_jar
-        run: |
-          echo "JAR_FILE=$(ls util/build/libs/*.jar)" >> $GITHUB_ENV
-
-      - name: Export Spring Datasource
-        id: export_datasource
-        run: |
-          echo "SPRING_DATASOURCE_URL=jdbc:mysql://application_db:3306/${{ secrets.DATABASE_NAME }}" >> $GITHUB_ENV
-          echo "SPRING_DATASOURCE_USERNAME=${{ secrets.DATABASE_USERNAME }}" >> $GITHUB_ENV
-          echo "SPRING_DATASOURCE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}" >> $GITHUB_ENV
-
-      - name: Build Docker image
-        run: |
-          docker buildx build ./ \
-          --platform=linux/amd64 \
-          --build-arg JAR_FILE=$JAR_FILE \
-          --build-arg SPRING_DATASOURCE_URL=$SPRING_DATASOURCE_URL \
-          --build-arg SPRING_DATASOURCE_USERNAME=$SPRING_DATASOURCE_USERNAME \
-          --build-arg SPRING_DATASOURCE_PASSWORD=$SPRING_DATASOURCE_PASSWORD \
-          -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_SPRING_REPOSITORY }}:latest 
-
-      - name: Log in to DockerHub
-        uses: docker/login-action@v2
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          name: build-artifact
+          path: build
 
-      - name: Push Docker image to DockerHub
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_SPRING_REPOSITORY }}:latest
+      - name: Upload Dockerfile
+        uses: actions/upload-artifact@v4
+        with:
+          name: Dockerfile
+          path: Dockerfile
