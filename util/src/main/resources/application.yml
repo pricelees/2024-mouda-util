@@ -21,7 +21,7 @@ team:
 
 seats:
   total-count: 9
-  empty-seat-name: --
+  empty-seat-name: abc
   seats-delimiter: ','
   assigned-count-by-team:
     frontend: 3
