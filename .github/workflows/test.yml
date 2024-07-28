@@ -1,0 +1,26 @@
+name: test
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+
+      - name: setup JDK 17 corretto
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'corretto'
+
+      - name: gradle build
+        run: |
+          cd util
+          chmod +x ./gradlew
+          ./gradlew clean build
