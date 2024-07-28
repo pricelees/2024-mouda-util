@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,6 +25,8 @@ public class ProgrammingPair {
 	private String frontend;
 	private String backend1;
 	private String backend2;
+
+	@Enumerated(value = EnumType.STRING)
 	private Level3Week week;
 
 	@Builder
