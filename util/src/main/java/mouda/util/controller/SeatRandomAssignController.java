@@ -17,6 +17,7 @@ public class SeatRandomAssignController {
 
 	private final SeatRandomAssignService seatRandomAssignService;
 
+	@Deprecated
 	@PostMapping("/seats/randomAssigned")
 	public String randomAssigned(
 		@RequestParam(name = "team") String teamName,

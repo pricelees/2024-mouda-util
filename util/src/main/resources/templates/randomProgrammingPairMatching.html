@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>프로그래밍 페어 매칭 결과</title>
+</head>
+<body>
+<div class="programming-pair-result">
+    <h2>페어 매칭 결과</h2>
+    <div class="pair-container">
+        <div th:each="pair, iterStat : ${pairs}">
+            <div class="pair">
+                <h3 th:text="'페어 ' + ${iterStat.index + 1}"></h3>
+                <div class="team-members">
+                    <span th:each="member : ${pair.members}" th:text="${member} + ' '"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="seat-assign-result">
+    <h2>자리 배정 결과</h2>
+    <div class="seating">
+        <table>
+            <tr>
+                <td th:text="${seats[0]}"></td>
+                <td></td>
+                <td th:text="${seats[3]}"></td>
+            </tr>
+            <tr>
+                <td th:text="${seats[1]}"></td>
+                <td></td>
+                <td th:text="${seats[4]}"></td>
+            </tr>
+            <tr>
+                <td th:text="${seats[2]}"></td>
+                <td></td>
+                <td th:text="${seats[5]}"></td>
+            </tr>
+            <tr>
+                <td th:text="${seats[6]}"></td>
+                <td th:text="${seats[7]}"></td>
+                <td th:text="${seats[8]}"></td>
+            </tr>
+        </table>
+    </div>
+    <button type="button" onclick="location.href='/'">처음으로</button>
+</div>
+</body>
+</html>

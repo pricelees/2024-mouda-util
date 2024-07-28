@@ -8,11 +8,22 @@
     <script src="/js/boardSubmitForm.js" defer></script>
 </head>
 <body>
-<div class="seat-assign">
-    <h2>모우다 랜덤 자리 배정</h2>
-    <h3 th:text="${startFrom.monthValue} + '월 ' + ${startFrom.dayOfMonth} + '일(월) 부터 ' + ${endAt.monthValue} + '월 ' + ${endAt.dayOfMonth} + '일(일) 까지의 자리 배치를 확인합니다.'"></h3>
-    <h4>자리가 그대로인 사람이 있을 수도 있어요!</h4>
-    <form id="randomAssignForm" th:action="@{/seats/randomAssigned}" method="post">
+<!--<div class="seat-assign">-->
+<!--    <h2>모우다 랜덤 자리 배정</h2>-->
+<!--    <h3 th:text="${startFrom.monthValue} + '월 ' + ${startFrom.dayOfMonth} + '일(월) 부터 ' + ${endAt.monthValue} + '월 ' + ${endAt.dayOfMonth} + '일(일) 까지의 자리 배치를 확인합니다.'"></h3>-->
+<!--    <h4>자리가 그대로인 사람이 있을 수도 있어요!</h4>-->
+<!--    <form id="randomAssignForm" th:action="@{/seats/randomAssigned}" method="post">-->
+<!--        <input type="hidden" name="team" th:value="${teamName != null ? teamName : 'mouda'}">-->
+<!--        <input type="hidden" name="searchDate" th:value="${searchDate}">-->
+<!--        <div class="button-container">-->
+<!--            <button type="submit">확인하기</button>-->
+<!--        </div>-->
+<!--    </form>-->
+<!--</div>-->
+<div class="pair-matching">
+    <h2>모우다 프로그래밍 페어 매칭 & 좌석 배정</h2>
+    <h3 th:text="${startFrom.monthValue} + '월 ' + ${startFrom.dayOfMonth} + '일(월) 부터 ' + ${endAt.monthValue} + '월 ' + ${endAt.dayOfMonth} + '일(일) 까지의 페어 매칭 정보를 확인합니다.'"></h3>
+    <form id="programmingPairMatchingForm" th:action="@{/pairs/programming}" method="post">
         <input type="hidden" name="team" th:value="${teamName != null ? teamName : 'mouda'}">
         <input type="hidden" name="searchDate" th:value="${searchDate}">
         <div class="button-container">
@@ -22,7 +33,7 @@
 </div>
 <br><br>
 <div class="pair-matching">
-    <h2>모우다 페어 매칭</h2>
+    <h2>모우다 1:1 페어 매칭</h2>
     <h3 th:text="${startFrom.monthValue} + '월 ' + ${startFrom.dayOfMonth} + '일(월) 부터 ' + ${endAt.monthValue} + '월 ' + ${endAt.dayOfMonth} + '일(일) 까지의 페어 매칭 정보를 확인합니다.'"></h3>
     <form id="pairMatchingForm" th:action="@{/pairs/randomMatching}" method="post">
         <input type="hidden" name="team" th:value="${teamName != null ? teamName : 'mouda'}">
