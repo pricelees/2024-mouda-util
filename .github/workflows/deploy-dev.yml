@@ -70,23 +70,19 @@ jobs:
 
       - name: allow ubuntu to access actions-runner
         run: |
-          sudo chown -R ubuntu:ubuntu ~/actions-runner
+          sudo chown -R ubuntu:ubuntu ./
 
       - name: grant permission to docker-compose
         run: |
-          sudo chmod +x ~/actions-runner/docker-compose.yml
+          sudo chmod +x docker-compose.yml
 
       - name: docker compose down
         run: |
-          docker compose -f ~/actions-runner/docker-compose.yml down 
-
-      - name: docker compose pull
-        run: |
-          docker compose -f ~/actions-runner/docker-compose.yml pull 1>/dev/null
+          docker compose down --rmi all 
 
       - name: docker compose up
         run: |
-          docker compose -f ~/actions-runner/docker-compose.yml up -d
+          docker compose up -d > /dev/null
       
-    
+      
 
