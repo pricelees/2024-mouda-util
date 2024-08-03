@@ -62,7 +62,7 @@ jobs:
 
       - name: run deploy script
         run: |
-          sh ./deploy.sh
+          ./deploy.sh
       
       
 
