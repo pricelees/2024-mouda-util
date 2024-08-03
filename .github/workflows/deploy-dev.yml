@@ -32,21 +32,11 @@ jobs:
         run: |
           echo "JAR_FILE=$(ls util/build/libs/*.jar)" >> $GITHUB_ENV
 
-      - name: Export Spring Datasource
-        id: export_datasource
-        run: |
-          echo "SPRING_DATASOURCE_URL=jdbc:mysql://application_db:3306/${{ secrets.DATABASE_NAME }}" >> $GITHUB_ENV
-          echo "SPRING_DATASOURCE_USERNAME=${{ secrets.DATABASE_USERNAME }}" >> $GITHUB_ENV
-          echo "SPRING_DATASOURCE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}" >> $GITHUB_ENV
-
       - name: Build Docker image
         run: |
           docker buildx build ./ \
           --platform=linux/amd64 \
           --build-arg JAR_FILE=$JAR_FILE \
-          --build-arg SPRING_DATASOURCE_URL=$SPRING_DATASOURCE_URL \
-          --build-arg SPRING_DATASOURCE_USERNAME=$SPRING_DATASOURCE_USERNAME \
-          --build-arg SPRING_DATASOURCE_PASSWORD=$SPRING_DATASOURCE_PASSWORD \
           -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_SPRING_REPOSITORY }}:latest 
 
       - name: Log in to DockerHub
@@ -60,29 +50,19 @@ jobs:
 
   deploy:
     needs: build-and-push-docker-image
-    runs-on: runner-dev
+    runs-on: self-hosted
     steps:
-      - name: Log in to DockerHub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: allow ubuntu to access actions-runner
+      - name: chown runner
         run: |
-          sudo chown -R ubuntu:ubuntu ./
+          sudo chown -R ubuntu:ubuntu ~/actions-runner
 
-      - name: grant permission to docker-compose
+      - name: grant permission to execute deploy script
         run: |
-          sudo chmod +x docker-compose.yml
+          chmod +x ./deploy.sh
 
-      - name: docker compose down
+      - name: run deploy script
         run: |
-          docker compose down --rmi all 
-
-      - name: docker compose up
-        run: |
-          docker compose up -d > /dev/null 2>&1
+          sh ./deploy.sh
       
       
 
