@@ -1,0 +1,16 @@
+name: add-env
+
+on:
+  pull_request:
+    branches:
+      - add-env
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: test
+        run: |
+          pwd
+          echo "${{ secrets.NEW_ENV }}" > new_env
