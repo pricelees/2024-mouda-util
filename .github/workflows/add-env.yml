@@ -1,7 +1,7 @@
 name: add-env
 
 on:
-  pull_request:
+  push:
     branches:
       - add-env
 
